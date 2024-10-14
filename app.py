@@ -20,13 +20,11 @@ passenger_count = st.number_input("Enter passenger count", min_value=1, max_valu
 
 ''''''
 
-# API URL (change it to your own API URL)
 url = 'https://wagon-data-tpl-image-1072314491692.europe-west1.run.app/predict'
 
 if url == 'https://wagon-data-tpl-image-1072314491692.europe-west1.run.app/predict':
     st.markdown('Maybe you want to use your own API for the prediction, not the one provided by Le Wagon...')
 
-# Build a dictionary containing the parameters for the API
 params = {
     "pickup_datetime": pickup_datetime,
     "pickup_longitude": pickup_longitude,
@@ -36,13 +34,11 @@ params = {
     "passenger_count": passenger_count
 }
 
-# Make API call when the user clicks the 'Predict Fare' button
 if st.button('Predict Fare'):
     response = requests.get(url, params=params)
 
     if response.status_code == 200:
         prediction = response.json()
-        # Display the prediction to the user
         st.write(f"Predicted fare: ${prediction['fare']:.2f}")
     else:
         st.write("Error in API call. Please check the input values and try again.")
